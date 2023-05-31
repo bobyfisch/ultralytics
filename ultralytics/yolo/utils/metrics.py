@@ -324,7 +324,7 @@ class ConfusionMatrix:
             warnings.simplefilter('ignore')  # suppress empty matrix RuntimeWarning: All-NaN slice encountered
             sn.heatmap(array,
                        ax=ax,
-                       annot=nc < 30,
+                       annot=nc < 40,
                        annot_kws={
                            'size': 8},
                        cmap='Blues',
