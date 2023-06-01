@@ -251,7 +251,13 @@ def plot_labels(boxes, cls, names=(), save_dir=Path(''), on_plot=None):
     with contextlib.suppress(Exception):  # color histogram bars by class
         [y[2].patches[i].set_color([x / 255 for x in colors(i)]) for i in range(nc)]  # known issue #3195
     ax[0].set_ylabel('instances')
-    if 0 < len(names) < 30:
+    
+    for rect in ax[0].patches:
+        height = rect.get_height()
+        ax[0].annotate(f'{int(height)}', xy=(rect.get_x()+rect.get_width()/2, height), 
+                xytext=(0, 5), textcoords='offset points', ha='center', va='bottom') 
+        
+    if 0 < len(names) < 40:
         ax[0].set_xticks(range(len(names)))
         ax[0].set_xticklabels(list(names.values()), rotation=90, fontsize=10)
     else:
