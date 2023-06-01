@@ -252,9 +252,11 @@ def plot_labels(boxes, cls, names=(), save_dir=Path(''), on_plot=None):
         [y[2].patches[i].set_color([x / 255 for x in colors(i)]) for i in range(nc)]  # known issue #3195
     ax[0].set_ylabel('instances')
     
-    for rect in ax[0].patches:
+    #print labels on top of bars
+    for i,rect in enumerate(ax[0].patches):
         height = rect.get_height()
-        ax[0].annotate(f'{int(height)}', xy=(rect.get_x()+rect.get_width()/2, height), 
+        zero_one =  i%2
+        ax[0].annotate(f'{int(height)}', xy=(rect.get_x()+rect.get_width()/2, height+(zero_one/10)), 
                 xytext=(0, 5), textcoords='offset points', ha='center', va='bottom') 
         
     if 0 < len(names) < 40:
